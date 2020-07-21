@@ -1,4 +1,4 @@
-# raspberry
+# r4spberry
 ## It really is worth a thousand words :/
 > *But incase you want to check some more, take a look at the [wiki](https://github.com/theboxahaan/raspberry/wiki)...*
 
