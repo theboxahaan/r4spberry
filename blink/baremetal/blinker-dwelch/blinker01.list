@@ -1,0 +1,119 @@
+
+blinker01.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00008000 <_start>:
+    8000:	eaffffff 	b	8004 <reset>
+
+00008004 <reset>:
+    8004:	e3a0da01 	mov	sp, #4096	; 0x1000
+    8008:	eb000005 	bl	8024 <notmain>
+
+0000800c <hang>:
+    800c:	eafffffe 	b	800c <hang>
+
+00008010 <PUT32>:
+    8010:	e5801000 	str	r1, [r0]
+    8014:	e12fff1e 	bx	lr
+
+00008018 <GET32>:
+    8018:	e5900000 	ldr	r0, [r0]
+    801c:	e12fff1e 	bx	lr
+
+00008020 <dummy>:
+    8020:	e12fff1e 	bx	lr
+
+00008024 <notmain>:
+    8024:	e52db008 	str	fp, [sp, #-8]!
+    8028:	e58de004 	str	lr, [sp, #4]
+    802c:	e28db004 	add	fp, sp, #4
+    8030:	e24dd008 	sub	sp, sp, #8
+    8034:	e3a00010 	mov	r0, #16
+    8038:	e34f0e20 	movt	r0, #65056	; 0xfe20
+    803c:	ebfffff5 	bl	8018 <GET32>
+    8040:	e50b0008 	str	r0, [fp, #-8]
+    8044:	e51b3008 	ldr	r3, [fp, #-8]
+    8048:	e3c33d07 	bic	r3, r3, #448	; 0x1c0
+    804c:	e50b3008 	str	r3, [fp, #-8]
+    8050:	e51b3008 	ldr	r3, [fp, #-8]
+    8054:	e3833040 	orr	r3, r3, #64	; 0x40
+    8058:	e50b3008 	str	r3, [fp, #-8]
+    805c:	e51b1008 	ldr	r1, [fp, #-8]
+    8060:	e3a00010 	mov	r0, #16
+    8064:	e34f0e20 	movt	r0, #65056	; 0xfe20
+    8068:	ebffffe8 	bl	8010 <PUT32>
+    806c:	e3a01b01 	mov	r1, #1024	; 0x400
+    8070:	e3a00020 	mov	r0, #32
+    8074:	e34f0e20 	movt	r0, #65056	; 0xfe20
+    8078:	ebffffe4 	bl	8010 <PUT32>
+    807c:	e3a03000 	mov	r3, #0
+    8080:	e50b3008 	str	r3, [fp, #-8]
+    8084:	ea000004 	b	809c <notmain+0x78>
+    8088:	e51b0008 	ldr	r0, [fp, #-8]
+    808c:	ebffffe3 	bl	8020 <dummy>
+    8090:	e51b3008 	ldr	r3, [fp, #-8]
+    8094:	e2833001 	add	r3, r3, #1
+    8098:	e50b3008 	str	r3, [fp, #-8]
+    809c:	e51b3008 	ldr	r3, [fp, #-8]
+    80a0:	e3530601 	cmp	r3, #1048576	; 0x100000
+    80a4:	3afffff7 	bcc	8088 <notmain+0x64>
+    80a8:	e3a01b01 	mov	r1, #1024	; 0x400
+    80ac:	e3a0002c 	mov	r0, #44	; 0x2c
+    80b0:	e34f0e20 	movt	r0, #65056	; 0xfe20
+    80b4:	ebffffd5 	bl	8010 <PUT32>
+    80b8:	e3a03000 	mov	r3, #0
+    80bc:	e50b3008 	str	r3, [fp, #-8]
+    80c0:	ea000004 	b	80d8 <notmain+0xb4>
+    80c4:	e51b0008 	ldr	r0, [fp, #-8]
+    80c8:	ebffffd4 	bl	8020 <dummy>
+    80cc:	e51b3008 	ldr	r3, [fp, #-8]
+    80d0:	e2833001 	add	r3, r3, #1
+    80d4:	e50b3008 	str	r3, [fp, #-8]
+    80d8:	e51b3008 	ldr	r3, [fp, #-8]
+    80dc:	e3530601 	cmp	r3, #1048576	; 0x100000
+    80e0:	3afffff7 	bcc	80c4 <notmain+0xa0>
+    80e4:	eaffffe0 	b	806c <notmain+0x48>
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347 	bcc	10d0d24 <_stack+0x1050d24>
+   4:	4e472820 	cdpmi	8, 4, cr2, cr7, cr0, {1}
+   8:	72412055 	subvc	r2, r1, #85	; 0x55
+   c:	6d45206d 	stclvs	0, cr2, [r5, #-436]	; 0xfffffe4c
+  10:	64646562 	strbtvs	r6, [r4], #-1378	; 0xfffffa9e
+  14:	54206465 	strtpl	r6, [r0], #-1125	; 0xfffffb9b
+  18:	636c6f6f 	cmnvs	ip, #444	; 0x1bc
+  1c:	6e696168 	powvsez	f6, f1, #0.0
+  20:	322d3920 	eorcc	r3, sp, #32, 18	; 0x80000
+  24:	2d303230 	lfmcs	f3, 4, [r0, #-192]!	; 0xffffff40
+  28:	752d3271 	strvc	r3, [sp, #-625]!	; 0xfffffd8f
+  2c:	74616470 	strbtvc	r6, [r1], #-1136	; 0xfffffb90
+  30:	39202965 	stmdbcc	r0!, {r0, r2, r5, r6, r8, fp, sp}
+  34:	312e332e 			; <UNDEFINED> instruction: 0x312e332e
+  38:	32303220 	eorscc	r3, r0, #32, 4
+  3c:	30343030 	eorscc	r3, r4, r0, lsr r0
+  40:	72282038 	eorvc	r2, r8, #56	; 0x38
+  44:	61656c65 	cmnvs	r5, r5, ror #24
+  48:	00296573 	eoreq	r6, r9, r3, ror r5
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00003441 	andeq	r3, r0, r1, asr #8
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	0000002a 	andeq	r0, r0, sl, lsr #32
+  10:	412d3805 			; <UNDEFINED> instruction: 0x412d3805
+  14:	070e0600 	streq	r0, [lr, -r0, lsl #12]
+  18:	09010841 	stmdbeq	r1, {r0, r6, fp}
+  1c:	0c070a02 			; <UNDEFINED> instruction: 0x0c070a02
+  20:	14041203 	strne	r1, [r4], #-515	; 0xfffffdfd
+  24:	17011501 	strne	r1, [r1, -r1, lsl #10]
+  28:	1a011803 	bne	4603c <__bss_end__+0x2df54>
+  2c:	22011c01 	andcs	r1, r1, #256	; 0x100
+  30:	44012a01 	strmi	r2, [r1], #-2561	; 0xfffff5ff
+  34:	Address 0x0000000000000034 is out of bounds.
+
