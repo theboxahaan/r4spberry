@@ -35,11 +35,11 @@ boot
 
 ## Configuring Headless Raspberry Pi<sup>[[5]](https://www.raspberrypi.org/documentation/configuration/wireless/headless.md)</sup>
 SSH access to the raspberry pi can can be configured by creating an empty `ssh` file and a `wpa_supplicant.conf` file containing the wifi credentials in the `boot` partition. 
-```
+```bash
 touch ssh
 ```
 `wpa_supplicant.conf` example
-```
+```bash
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=<Insert 2 letter ISO 3166-1 country code here>
@@ -54,7 +54,7 @@ Once Linux is booted, the Pi should automatically connect to the `SSID` specifie
 
 ### Connecting via SSH
 There is no point setting a VNC as this Linux distrib does not have a desktop, so SSH is the way to go. Raspberry Pi 4 supports `mDNS` which makes things easier as we are not bothered by the exact IP. To check the availability for connecting, make sure your client is on the same network as the Pi and ping it-
-```
+```bash
 ping raspberrypi.local
 ```
 If responses are successful, we can initiate an SSH connection by `ssh pi@raspberrypi.local` with the default password being `raspberry`. This should get an SSH session started.
